@@ -1,0 +1,58 @@
+[gd_resource type="SpriteFrames" load_steps=8 format=3 uid="uid://buq5mo5sylvad"]
+
+[ext_resource type="Texture2D" uid="uid://c2qqy2xaf7dmx" path="res://assets/sprites/player/platformChar_climb1.png" id="1_yson2"]
+[ext_resource type="Texture2D" uid="uid://bmatipvyvosta" path="res://assets/sprites/player/platformChar_climb2.png" id="2_buuqf"]
+[ext_resource type="Texture2D" uid="uid://ckwl3se8qfl0o" path="res://assets/sprites/player/platformChar_duck.png" id="3_4booy"]
+[ext_resource type="Texture2D" uid="uid://5sprdtfdjpxb" path="res://assets/sprites/player/platformChar_idle.png" id="4_rqotx"]
+[ext_resource type="Texture2D" uid="uid://cjmhq1h5w4wlp" path="res://assets/sprites/player/platformChar_jump.png" id="5_ccx2g"]
+[ext_resource type="Texture2D" uid="uid://qtksk1tb2ayd" path="res://assets/sprites/player/platformChar_walk1.png" id="6_tpyep"]
+[ext_resource type="Texture2D" uid="uid://csi64vt7wdrxs" path="res://assets/sprites/player/platformChar_walk2.png" id="7_k3mso"]
+
+[resource]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_yson2")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_buuqf")
+}],
+"loop": true,
+"name": &"climbing",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("3_4booy")
+}],
+"loop": true,
+"name": &"duck",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("4_rqotx")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("5_ccx2g")
+}],
+"loop": true,
+"name": &"jump",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("6_tpyep")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_k3mso")
+}],
+"loop": true,
+"name": &"walk",
+"speed": 5.0
+}]
