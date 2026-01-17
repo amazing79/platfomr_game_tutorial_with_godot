@@ -60,6 +60,8 @@ func set_state(new:State) -> void:
 		State.DUCK:
 			$sprite.play("duck")
 			
-			
-		
+
+func _on_fall_zone_body_entered(body: Node2D) -> void:
+	body.call_deferred("queue_free")
+	get_tree().change_scene_to_file("res://assets/scenes/maps/level_1.tscn")
 	

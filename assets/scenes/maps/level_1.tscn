@@ -1,68 +1,121 @@
-[gd_scene load_steps=4 format=3 uid="uid://eg5o244pqugm"]
+[gd_scene load_steps=17 format=4 uid="uid://eg5o244pqugm"]
 
-[ext_resource type="Texture2D" uid="uid://ubrc5o3ch6nl" path="res://icon.svg" id="1_jllx8"]
+[ext_resource type="Texture2D" uid="uid://cu0fbwg2xyseq" path="res://assets/backgrounds/set2_background.png" id="1_23csr"]
+[ext_resource type="Texture2D" uid="uid://dcksoxyv8i4lt" path="res://assets/scenes/tiles/WorldTiles/tileYellow_16.png" id="1_i53gy"]
+[ext_resource type="TileSet" uid="uid://ckn1cttr3aoeu" path="res://assets/scenes/maps/floors.tres" id="1_jllx8"]
+[ext_resource type="Texture2D" uid="uid://bcirl3ohvx5il" path="res://assets/scenes/tiles/WorldTiles/tileYellow_17.png" id="2_23csr"]
+[ext_resource type="Texture2D" uid="uid://cueh60d3hbw1e" path="res://assets/backgrounds/set2_tiles.png" id="2_agepc"]
 [ext_resource type="PackedScene" uid="uid://emnx6mgp8n44" path="res://assets/scenes/entities/player/steve.tscn" id="2_jhw3l"]
+[ext_resource type="Texture2D" uid="uid://dw6n53j528nal" path="res://assets/scenes/tiles/WorldTiles/tileYellow_06.png" id="3_agepc"]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_kh38b"]
-size = Vector2(883, 127)
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_o2yio"]
+texture = ExtResource("1_i53gy")
+texture_region_size = Vector2i(64, 64)
+0:0/0 = 0
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_thd7k"]
+texture = ExtResource("2_23csr")
+texture_region_size = Vector2i(64, 64)
+0:0/0 = 0
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_6kfic"]
+texture = ExtResource("3_agepc")
+texture_region_size = Vector2i(64, 64)
+0:0/0 = 0
+
+[sub_resource type="TileSet" id="TileSet_ihcem"]
+tile_size = Vector2i(64, 64)
+sources/0 = SubResource("TileSetAtlasSource_o2yio")
+sources/1 = SubResource("TileSetAtlasSource_thd7k")
+sources/2 = SubResource("TileSetAtlasSource_6kfic")
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_i53gy"]
+size = Vector2(544, 56)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_23csr"]
+size = Vector2(288, 72)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_agepc"]
+size = Vector2(338, 50.5)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_o2yio"]
+size = Vector2(212, 56)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_thd7k"]
+size = Vector2(4267, 83.5)
 
 [node name="Level1" type="Node2D"]
 
-[node name="floor" type="StaticBody2D" parent="."]
-position = Vector2(120.999985, 488)
-scale = Vector2(1.0031914, 0.6250702)
-metadata/_edit_group_ = true
+[node name="Parallax" type="Node2D" parent="."]
 
-[node name="Sprite2D" type="Sprite2D" parent="floor"]
-position = Vector2(379.5, 0)
-scale = Vector2(6.9296875, 1)
-texture = ExtResource("1_jllx8")
+[node name="Parallax2D" type="Parallax2D" parent="Parallax"]
+texture_filter = 1
+scroll_scale = Vector2(0.2, 0.2)
+repeat_size = Vector2(640, 480)
+repeat_times = 5
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="floor"]
-position = Vector2(379.5, 0.5)
-shape = SubResource("RectangleShape2D_kh38b")
+[node name="Sprite2D" type="Sprite2D" parent="Parallax/Parallax2D"]
+texture = ExtResource("1_23csr")
 
-[node name="floor2" type="StaticBody2D" parent="."]
-position = Vector2(1103, 303)
-scale = Vector2(1.0031914, 0.6250702)
-metadata/_edit_group_ = true
+[node name="Parallax2D3" type="Parallax2D" parent="Parallax"]
+modulate = Color(0.13298741, 0.42948306, 0.3968836, 1)
+texture_filter = 1
+scale = Vector2(3, 3)
+scroll_scale = Vector2(0.3, 0.3)
+repeat_size = Vector2(640, 480)
+repeat_times = 3
 
-[node name="Sprite2D" type="Sprite2D" parent="floor2"]
-position = Vector2(379.5, 0)
-scale = Vector2(6.9296875, 1)
-texture = ExtResource("1_jllx8")
+[node name="Sprite2D" type="Sprite2D" parent="Parallax/Parallax2D3"]
+texture = ExtResource("2_agepc")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="floor2"]
-position = Vector2(379.5, 0.5)
-shape = SubResource("RectangleShape2D_kh38b")
+[node name="Parallax2D2" type="Parallax2D" parent="Parallax"]
+modulate = Color(0.73300546, 0.7330054, 0.7330054, 1)
+texture_filter = 1
+scroll_scale = Vector2(0.6, 0.6)
+repeat_size = Vector2(640, 480)
+repeat_times = 5
 
-[node name="floor3" type="StaticBody2D" parent="."]
-position = Vector2(2077, 121)
-scale = Vector2(1.0031914, 0.6250702)
-metadata/_edit_group_ = true
+[node name="Sprite2D" type="Sprite2D" parent="Parallax/Parallax2D2"]
+texture = ExtResource("2_agepc")
 
-[node name="Sprite2D" type="Sprite2D" parent="floor3"]
-position = Vector2(379.5, 0)
-scale = Vector2(6.9296875, 1)
-texture = ExtResource("1_jllx8")
+[node name="SolidTiles" type="TileMapLayer" parent="."]
+position = Vector2(-33, -26)
+tile_map_data = PackedByteArray("AAACAAcAFQAAAAAAAAADAAcAFQAAAAAAAAAEAAcAFQAAAAAAAAAFAAcAFQAAAAAAAAAGAAcAFQAAAAAAAAAHAAcAFQAAAAAAAAAIAAcAFQAAAAAAAAAJAAcAFQAAAAAAAAAKAAcAFQAAAAAAAAABAAcAFAAAAAAAAAALAAcAFgAAAAAAAAABAAgAEwAAAAAAAAABAAkAEwAAAAAAAAACAAgAEwAAAAAAAAACAAkAEwAAAAAAAAADAAgAEwAAAAAAAAADAAkAEwAAAAAAAAAEAAgAEwAAAAAAAAAEAAkAEwAAAAAAAAAFAAgAEwAAAAAAAAAFAAkAEwAAAAAAAAAGAAgAEwAAAAAAAAAGAAkAEwAAAAAAAAAHAAgAEwAAAAAAAAAHAAkAEwAAAAAAAAAIAAgAEwAAAAAAAAAIAAkAEwAAAAAAAAAJAAgAEwAAAAAAAAAJAAkAEwAAAAAAAAAKAAgAEwAAAAAAAAAKAAkAEwAAAAAAAAALAAgAEwAAAAAAAAALAAkAEwAAAAAAAAAKAAQAHAAAAAAAAAAOAAQAHQAAAAAAAAALAAQAIgAAAAAAAAAMAAQAIgAAAAAAAAANAAQAIgAAAAAAAAASAAcAIgAAAAAAAAATAAcAIgAAAAAAAAAUAAcAIgAAAAAAAAAVAAcAIgAAAAAAAAAWAAcAIgAAAAAAAAAXAAcAIgAAAAAAAAAYAAcAIgAAAAAAAAAZAAcAIgAAAAAAAAAaAAcAFgAAAAAAAAAQAAEAIgAAAAAAAAARAAEAIgAAAAAAAAASAAEAIgAAAAAAAAATAAEAIgAAAAAAAAAUAAEAIgAAAAAAAAAVAAEAIgAAAAAAAAAWAAEAIgAAAAAAAAAXAAEAIgAAAAAAAAAVAAQAIgAAAAAAAAAWAAQAIgAAAAAAAAAXAAQAIgAAAAAAAAAYAAQAIgAAAAAAAAAeAAcAFAAAAAAAAAAfAAcAIgAAAAAAAAAgAAcAIgAAAAAAAAAhAAcAIgAAAAAAAAAiAAcAIgAAAAAAAAAjAAcAIgAAAAAAAAAkAAcAIgAAAAAAAAAlAAcAIgAAAAAAAAAmAAcAIgAAAAAAAAAnAAcAIgAAAAAAAAAoAAcAFgAAAAAAAAAgAAQAIgAAAAAAAAAhAAQAHQAAAAAAAAAiAAEAIgAAAAAAAAAjAAEAIgAAAAAAAAAkAAEAIgAAAAAAAAAlAAEAIgAAAAAAAAAmAAEAIgAAAAAAAAAnAAEAIgAAAAAAAAAoAAEAIgAAAAAAAAApAAEAIgAAAAAAAAAqAAEAIgAAAAAAAAArAAEAIgAAAAAAAAAsAAEAIgAAAAAAAAAtAAEAIgAAAAAAAAAuAAEAIgAAAAAAAAAvAAEAIgAAAAAAAAAwAAEAHQAAAAAAAAAfAAQAHAAAAAAAAAAUAAQAFAAAAAAAAAAPAAEAHAAAAAAAAAAhAAEAHAAAAAAAAAAZAAQAFgAAAAAAAAARAAcAFAAAAAAAAAARAAgAEwAAAAAAAAASAAgAEwAAAAAAAAATAAgAEwAAAAAAAAAUAAgAEwAAAAAAAAAVAAgAEwAAAAAAAAAWAAgAEwAAAAAAAAAXAAgAEwAAAAAAAAAYAAgAEwAAAAAAAAAZAAgAEwAAAAAAAAAaAAgAEwAAAAAAAAARAAkAEwAAAAAAAAASAAkAEwAAAAAAAAATAAkAEwAAAAAAAAAUAAkAEwAAAAAAAAAVAAkAEwAAAAAAAAAWAAkAEwAAAAAAAAAXAAkAEwAAAAAAAAAYAAkAEwAAAAAAAAAZAAkAEwAAAAAAAAAaAAkAEwAAAAAAAAAeAAgAEwAAAAAAAAAfAAgAEwAAAAAAAAAgAAgAEwAAAAAAAAAhAAgAEwAAAAAAAAAiAAgAEwAAAAAAAAAjAAgAEwAAAAAAAAAkAAgAEwAAAAAAAAAlAAgAEwAAAAAAAAAmAAgAEwAAAAAAAAAnAAgAEwAAAAAAAAAoAAgAEwAAAAAAAAAeAAkAEwAAAAAAAAAfAAkAEwAAAAAAAAAgAAkAEwAAAAAAAAAhAAkAEwAAAAAAAAAiAAkAEwAAAAAAAAAjAAkAEwAAAAAAAAAkAAkAEwAAAAAAAAAlAAkAEwAAAAAAAAAmAAkAEwAAAAAAAAAnAAkAEwAAAAAAAAAoAAkAEwAAAAAAAAAYAAEAHQAAAAAAAAADAAQAFwAAAAAAAAARAP7/FwAAAAAAAAAEAAUAFwAAAAAAAAADAAUAEwAAAAAAAAADAAYAEwAAAAAAAAAEAAYAEwAAAAAAAAARAP//EwAAAAAAAAARAAAAEwAAAAAAAAAWAAUAEwAAAAAAAAAWAAYAEwAAAAAAAAAXAAUAEwAAAAAAAAAXAAYAEwAAAAAAAAAVAAUAEwAAAAAAAAAVAAYAEwAAAAAAAAAYAAUAEwAAAAAAAAAYAAYAEwAAAAAAAAAUAAUAEwAAAAAAAAAUAAYAEwAAAAAAAAAZAAUAEwAAAAAAAAAZAAYAEwAAAAAAAAA=")
+tile_set = ExtResource("1_jllx8")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="floor3"]
-position = Vector2(379.5, 0.5)
-shape = SubResource("RectangleShape2D_kh38b")
+[node name="TileOneWay" type="TileMapLayer" parent="."]
+tile_map_data = PackedByteArray("AAArAAQAAgAAAAAAAAAsAAQAAgAAAAAAAAAtAAQAAgAAAAAAAAAuAAQAAgAAAAAAAAAvAAQAAgAAAAAAAAAwAAQAAgAAAAAAAAAxAAQAAgAAAAAAAAAqAAQAAAAAAAAAAAAyAAQAAQAAAAAAAAA0AAEAAgAAAAAAAAA1AAEAAgAAAAAAAAA2AAEAAgAAAAAAAAA3AAEAAgAAAAAAAAAqAP7/AgAAAAAAAAArAP7/AgAAAAAAAAAsAP7/AgAAAAAAAAA2AP7/AgAAAAAAAAA3AP7/AgAAAAAAAAA4AP7/AQAAAAAAAAA4AAEAAQAAAAAAAAAtAP7/AQAAAAAAAAAzAAEAAAAAAAAAAAA1AP7/AAAAAAAAAAApAP7/AAAAAAAAAAA=")
+tile_set = SubResource("TileSet_ihcem")
 
-[node name="floor4" type="StaticBody2D" parent="."]
-position = Vector2(2064, 452)
-scale = Vector2(1.0031914, 0.6250702)
-metadata/_edit_group_ = true
+[node name="StaticBody2D" type="StaticBody2D" parent="TileOneWay"]
 
-[node name="Sprite2D" type="Sprite2D" parent="floor4"]
-position = Vector2(379.5, 0)
-scale = Vector2(6.9296875, 1)
-texture = ExtResource("1_jllx8")
+[node name="CollisionShape2D" type="CollisionShape2D" parent="TileOneWay/StaticBody2D"]
+position = Vector2(2984, 288)
+shape = SubResource("RectangleShape2D_i53gy")
+one_way_collision = true
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="floor4"]
-position = Vector2(379.5, 0.5)
-shape = SubResource("RectangleShape2D_kh38b")
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="TileOneWay/StaticBody2D"]
+position = Vector2(2784, -92)
+shape = SubResource("RectangleShape2D_23csr")
+one_way_collision = true
+
+[node name="CollisionShape2D3" type="CollisionShape2D" parent="TileOneWay/StaticBody2D"]
+position = Vector2(3456, 89.25)
+shape = SubResource("RectangleShape2D_agepc")
+one_way_collision = true
+
+[node name="CollisionShape2D4" type="CollisionShape2D" parent="TileOneWay/StaticBody2D"]
+position = Vector2(3518, -100)
+shape = SubResource("RectangleShape2D_o2yio")
+one_way_collision = true
 
 [node name="Steve" parent="." instance=ExtResource("2_jhw3l")]
 position = Vector2(178, 64)
+
+[node name="FallZone" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="FallZone"]
+position = Vector2(1914, 645)
+shape = SubResource("RectangleShape2D_thd7k")
+
+[connection signal="body_entered" from="FallZone" to="Steve" method="_on_fall_zone_body_entered"]
