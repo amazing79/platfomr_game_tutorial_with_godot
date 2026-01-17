@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=4 uid="uid://eg5o244pqugm"]
+[gd_scene load_steps=18 format=4 uid="uid://eg5o244pqugm"]
 
 [ext_resource type="Texture2D" uid="uid://cu0fbwg2xyseq" path="res://assets/backgrounds/set2_background.png" id="1_23csr"]
 [ext_resource type="Texture2D" uid="uid://dcksoxyv8i4lt" path="res://assets/scenes/tiles/WorldTiles/tileYellow_16.png" id="1_i53gy"]
@@ -7,6 +7,7 @@
 [ext_resource type="Texture2D" uid="uid://cueh60d3hbw1e" path="res://assets/backgrounds/set2_tiles.png" id="2_agepc"]
 [ext_resource type="PackedScene" uid="uid://emnx6mgp8n44" path="res://assets/scenes/entities/player/steve.tscn" id="2_jhw3l"]
 [ext_resource type="Texture2D" uid="uid://dw6n53j528nal" path="res://assets/scenes/tiles/WorldTiles/tileYellow_06.png" id="3_agepc"]
+[ext_resource type="PackedScene" uid="uid://80yq0pjfd07t" path="res://assets/scenes/entities/coin/coin.tscn" id="8_o2yio"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_o2yio"]
 texture = ExtResource("1_i53gy")
@@ -88,6 +89,8 @@ tile_map_data = PackedByteArray("AAArAAQAAgAAAAAAAAAsAAQAAgAAAAAAAAAtAAQAAgAAAAA
 tile_set = SubResource("TileSet_ihcem")
 
 [node name="StaticBody2D" type="StaticBody2D" parent="TileOneWay"]
+collision_layer = 2
+collision_mask = 0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="TileOneWay/StaticBody2D"]
 position = Vector2(2984, 288)
@@ -111,11 +114,27 @@ one_way_collision = true
 
 [node name="Steve" parent="." instance=ExtResource("2_jhw3l")]
 position = Vector2(178, 64)
+collision_mask = 14
 
 [node name="FallZone" type="Area2D" parent="."]
+collision_layer = 4
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="FallZone"]
 position = Vector2(1914, 645)
 shape = SubResource("RectangleShape2D_thd7k")
+
+[node name="Coins" type="Node2D" parent="."]
+
+[node name="Coin" parent="Coins" instance=ExtResource("8_o2yio")]
+position = Vector2(1245, -52)
+
+[node name="Coin2" parent="Coins" instance=ExtResource("8_o2yio")]
+position = Vector2(3740, -167)
+
+[node name="Coin3" parent="Coins" instance=ExtResource("8_o2yio")]
+position = Vector2(2263, 342)
+
+[node name="Coin4" parent="Coins" instance=ExtResource("8_o2yio")]
+position = Vector2(2051, 169)
 
 [connection signal="body_entered" from="FallZone" to="Steve" method="_on_fall_zone_body_entered"]

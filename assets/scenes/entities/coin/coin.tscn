@@ -1,0 +1,87 @@
+[gd_scene load_steps=10 format=3 uid="uid://80yq0pjfd07t"]
+
+[ext_resource type="Script" uid="uid://bskou6pjhy182" path="res://assets/sprites/coin/coin.gd" id="1_7dcyr"]
+[ext_resource type="Texture2D" uid="uid://dtu462ayn1sqa" path="res://assets/sprites/coin/gold_1.png" id="2_0kgo7"]
+[ext_resource type="Texture2D" uid="uid://crkrbqilca4c1" path="res://assets/sprites/coin/gold_2.png" id="3_cnbdc"]
+[ext_resource type="Texture2D" uid="uid://sskx7l7q2c" path="res://assets/sprites/coin/gold_3.png" id="4_tnkm2"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_em216"]
+radius = 44.418465
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_xuif2"]
+animations = [{
+"frames": [{
+"duration": 0.8,
+"texture": ExtResource("2_0kgo7")
+}, {
+"duration": 0.8,
+"texture": ExtResource("3_cnbdc")
+}, {
+"duration": 0.8,
+"texture": ExtResource("4_tnkm2")
+}, {
+"duration": 0.8,
+"texture": ExtResource("3_cnbdc")
+}],
+"loop": true,
+"name": &"spin",
+"speed": 5.0
+}]
+
+[sub_resource type="Animation" id="Animation_7dcyr"]
+resource_name = "bounce"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.31326044, 0.70056427, 1),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(0, -165), Vector2(0, -73), Vector2(0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_0kgo7"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_cnbdc"]
+_data = {
+&"RESET": SubResource("Animation_0kgo7"),
+&"bounce": SubResource("Animation_7dcyr")
+}
+
+[node name="Coin" type="Node2D"]
+
+[node name="Coin" type="Area2D" parent="."]
+collision_layer = 8
+script = ExtResource("1_7dcyr")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Coin"]
+shape = SubResource("CircleShape2D_em216")
+
+[node name="Animation" type="AnimatedSprite2D" parent="Coin"]
+sprite_frames = SubResource("SpriteFrames_xuif2")
+animation = &"spin"
+speed_scale = 0.5
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Coin"]
+libraries = {
+&"": SubResource("AnimationLibrary_cnbdc")
+}
+
+[connection signal="body_entered" from="Coin" to="Coin" method="_on_body_entered"]
+[connection signal="animation_finished" from="Coin/AnimationPlayer" to="Coin" method="_on_animation_player_animation_finished"]
