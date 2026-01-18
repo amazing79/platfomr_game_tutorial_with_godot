@@ -35,7 +35,6 @@ func _physics_process(delta: float) -> void:
 	if Input.is_action_just_pressed("jump") and is_on_floor():
 		velocity.y = jump_velocity
 	
-
 	# Get the input direction and handle the movement/deceleration.
 	# As good practice, you should replace UI actions with custom gameplay actions.
 	var direction := Input.get_axis("left", "right")
@@ -47,7 +46,9 @@ func _physics_process(delta: float) -> void:
 	
 	set_state(actual)
 	$sprite.flip_h = flip
+	
 	move_and_slide()
+	
 	
 func set_state(new:State) -> void:
 	match new:
@@ -61,7 +62,11 @@ func set_state(new:State) -> void:
 			$sprite.play("duck")
 			
 
-func _on_fall_zone_body_entered(body: Node2D) -> void:
-	body.call_deferred("queue_free")
-	get_tree().change_scene_to_file("res://assets/scenes/maps/level_1.tscn")
+func _on_fall_zone_body_entered(_body: Node2D) -> void:
+	Globals.coins = 0
+	Globals.remove_lives()
+	reset_scene()
 	
+
+func reset_scene() -> void:
+	get_tree().reload_current_scene()

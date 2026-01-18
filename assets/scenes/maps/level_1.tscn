@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=4 uid="uid://eg5o244pqugm"]
+[gd_scene load_steps=25 format=4 uid="uid://eg5o244pqugm"]
 
 [ext_resource type="Texture2D" uid="uid://cu0fbwg2xyseq" path="res://assets/backgrounds/set2_background.png" id="1_23csr"]
 [ext_resource type="Texture2D" uid="uid://dcksoxyv8i4lt" path="res://assets/scenes/tiles/WorldTiles/tileYellow_16.png" id="1_i53gy"]
@@ -8,6 +8,10 @@
 [ext_resource type="PackedScene" uid="uid://emnx6mgp8n44" path="res://assets/scenes/entities/player/steve.tscn" id="2_jhw3l"]
 [ext_resource type="Texture2D" uid="uid://dw6n53j528nal" path="res://assets/scenes/tiles/WorldTiles/tileYellow_06.png" id="3_agepc"]
 [ext_resource type="PackedScene" uid="uid://80yq0pjfd07t" path="res://assets/scenes/entities/coin/coin.tscn" id="8_o2yio"]
+[ext_resource type="Texture2D" uid="uid://bl7tu4r66e5bt" path="res://assets/HUD/coin_gold.png" id="9_6kfic"]
+[ext_resource type="Script" uid="uid://dmi0n4qfgx63i" path="res://assets/scenes/maps/hud.gd" id="9_ihcem"]
+[ext_resource type="FontFile" uid="uid://duadsxbxdrojq" path="res://assets/fonts/BalsamiqSans-Bold.ttf" id="10_ihcem"]
+[ext_resource type="PackedScene" uid="uid://b2lhcijkx5ani" path="res://assets/scenes/entities/enemies/enemy.tscn" id="12_rgf7o"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_o2yio"]
 texture = ExtResource("1_i53gy")
@@ -44,6 +48,23 @@ size = Vector2(212, 56)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_thd7k"]
 size = Vector2(4267, 83.5)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_rgf7o"]
+bg_color = Color(0.039215688, 0.039215688, 0.039215688, 0.4509804)
+corner_radius_top_left = 20
+corner_radius_top_right = 20
+corner_radius_bottom_right = 20
+corner_radius_bottom_left = 20
+
+[sub_resource type="LabelSettings" id="LabelSettings_i8bvg"]
+font = ExtResource("10_ihcem")
+font_size = 64
+font_color = Color(1, 1, 0.043137256, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_ihcem"]
+font = ExtResource("10_ihcem")
+font_size = 32
+font_color = Color(1, 1, 0.043137256, 1)
 
 [node name="Level1" type="Node2D"]
 
@@ -114,7 +135,6 @@ one_way_collision = true
 
 [node name="Steve" parent="." instance=ExtResource("2_jhw3l")]
 position = Vector2(178, 64)
-collision_mask = 14
 
 [node name="FallZone" type="Area2D" parent="."]
 collision_layer = 4
@@ -136,5 +156,57 @@ position = Vector2(2263, 342)
 
 [node name="Coin4" parent="Coins" instance=ExtResource("8_o2yio")]
 position = Vector2(2051, 169)
+
+[node name="HUD" type="CanvasLayer" parent="."]
+script = ExtResource("9_ihcem")
+
+[node name="Panel" type="Panel" parent="HUD"]
+offset_left = 29.0
+offset_top = 23.0
+offset_right = 268.0
+offset_bottom = 108.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_rgf7o")
+
+[node name="TextureRect" type="TextureRect" parent="HUD"]
+offset_left = 44.0
+offset_top = 34.0
+offset_right = 105.0
+offset_bottom = 95.0
+texture = ExtResource("9_6kfic")
+
+[node name="Coins" type="Label" parent="HUD"]
+offset_left = 139.0
+offset_top = 30.0
+offset_right = 206.24527
+offset_bottom = 108.0
+text = "0"
+label_settings = SubResource("LabelSettings_i8bvg")
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 2
+
+[node name="X" type="Label" parent="HUD"]
+offset_left = 103.0
+offset_top = 49.0
+offset_right = 153.0
+offset_bottom = 88.0
+text = "X"
+label_settings = SubResource("LabelSettings_ihcem")
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 2
+
+[node name="Node2D" type="Node2D" parent="."]
+
+[node name="Enemy" parent="Node2D" instance=ExtResource("12_rgf7o")]
+position = Vector2(830, 206)
+
+[node name="Enemy2" parent="Node2D" instance=ExtResource("12_rgf7o")]
+position = Vector2(519, 148)
+direction = 1
+
+[node name="Enemy3" parent="Node2D" instance=ExtResource("12_rgf7o")]
+position = Vector2(1134, 17)
+detect_cliffs = false
 
 [connection signal="body_entered" from="FallZone" to="Steve" method="_on_fall_zone_body_entered"]

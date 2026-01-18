@@ -1,0 +1,40 @@
+[gd_scene load_steps=6 format=3 uid="uid://b2lhcijkx5ani"]
+
+[ext_resource type="Texture2D" uid="uid://yeolksjgt0jf" path="res://assets/sprites/enemies/slimeBlue.png" id="1_l8ev2"]
+[ext_resource type="Script" uid="uid://da2xyvbkd5kil" path="res://assets/scenes/entities/enemies/enemy.gd" id="1_xpmmi"]
+[ext_resource type="Texture2D" uid="uid://d5m35t77f6y2" path="res://assets/sprites/enemies/slimeBlue_blue.png" id="2_xpmmi"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_3nc81"]
+animations = [{
+"frames": [{
+"duration": 1.5,
+"texture": ExtResource("1_l8ev2")
+}, {
+"duration": 1.5,
+"texture": ExtResource("2_xpmmi")
+}],
+"loop": true,
+"name": &"walking",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_moccm"]
+size = Vector2(44, 26)
+
+[node name="Enemy" type="CharacterBody2D"]
+collision_layer = 16
+collision_mask = 3
+script = ExtResource("1_xpmmi")
+
+[node name="EnemySprite" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_3nc81")
+animation = &"walking"
+frame_progress = 0.59366226
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, 4)
+shape = SubResource("RectangleShape2D_moccm")
+
+[node name="Floor_checker" type="RayCast2D" parent="."]
+target_position = Vector2(0, 37)
+collision_mask = 2
