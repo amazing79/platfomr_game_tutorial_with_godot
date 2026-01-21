@@ -12,8 +12,15 @@ enum State {
 @export var speed : float = 450.0
 @export var jump_velocity : float = -600.0
 
+const PUSH_FORCE : float = 250.0
 var actual: State = State.IDLE
 var flip = false
+var color_original: Color
+var speed_original: float = speed
+
+func _ready() -> void:
+	color_original = self.modulate
+
 
 func _physics_process(delta: float) -> void:
 	# Add the gravity.
@@ -46,10 +53,9 @@ func _physics_process(delta: float) -> void:
 	
 	set_state(actual)
 	$sprite.flip_h = flip
-	
 	move_and_slide()
 	
-	
+
 func set_state(new:State) -> void:
 	match new:
 		State.IDLE:
@@ -70,3 +76,30 @@ func _on_fall_zone_body_entered(_body: Node2D) -> void:
 
 func reset_scene() -> void:
 	get_tree().reload_current_scene()
+	
+func rebound() -> void:
+	velocity.y = jump_velocity * 0.75
+	
+func take_damege(enemy_position : float) -> void:
+	$Timer.start()
+	speed = 0
+	velocity.y = jump_velocity * .5
+	modulate = Color(0.796, 0.0, 0.0, 0.525)
+	if position.x <= enemy_position:
+		#esta a la izquierda
+		velocity.x -= PUSH_FORCE
+	else:
+		#Esta a la derecha	
+		velocity.x += PUSH_FORCE
+	set_collision_layer_value(1,false)
+	set_collision_mask_value(5, false)
+	Input.action_release("left")
+	Input.action_release("right")
+	Globals.remove_lives()
+
+
+func _on_timer_timeout() -> void:
+	set_collision_layer_value(1 , true)
+	set_collision_mask_value(5, true)
+	self.modulate = color_original
+	speed = speed_original

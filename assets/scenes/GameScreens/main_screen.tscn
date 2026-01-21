@@ -1,0 +1,252 @@
+[gd_scene load_steps=16 format=3 uid="uid://b7d6f7a2nwuvc"]
+
+[ext_resource type="Script" uid="uid://e8vgr7cn7xho" path="res://assets/scenes/GameScreens/main_screen.gd" id="1_r4uce"]
+[ext_resource type="FontFile" uid="uid://drt2mvfoeqfea" path="res://assets/fonts/KiriFont.ttf" id="2_g3lvd"]
+[ext_resource type="Texture2D" uid="uid://bsoucfrefnuqk" path="res://assets/HUD/grey_button04.png" id="3_ex7xl"]
+[ext_resource type="Texture2D" uid="uid://ch5pa4nkub1kh" path="res://assets/HUD/grey_button13.png" id="4_sh7xu"]
+[ext_resource type="Texture2D" uid="uid://b43c7jf1vbm3n" path="res://assets/HUD/arrow-UP.png" id="5_malbg"]
+[ext_resource type="FontFile" uid="uid://duadsxbxdrojq" path="res://assets/fonts/BalsamiqSans-Bold.ttf" id="6_ex7xl"]
+[ext_resource type="Texture2D" uid="uid://br1biunb3x1p6" path="res://assets/sprites/player/platformChar_happy.png" id="7_d4in7"]
+[ext_resource type="Texture2D" uid="uid://yeolksjgt0jf" path="res://assets/sprites/enemies/slimeBlue.png" id="8_4bfbu"]
+[ext_resource type="Texture2D" uid="uid://dtu462ayn1sqa" path="res://assets/sprites/coin/gold_1.png" id="9_1mblp"]
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_mo3rj"]
+blend_mode = 1
+
+[sub_resource type="LabelSettings" id="LabelSettings_d4in7"]
+font = ExtResource("2_g3lvd")
+font_size = 56
+font_color = Color(0.84313726, 0.4117647, 0.007843138, 1)
+outline_color = Color(0, 0, 0, 1)
+shadow_offset = Vector2(3, 3)
+
+[sub_resource type="LabelSettings" id="LabelSettings_4bfbu"]
+font_size = 24
+font_color = Color(0.26657522, 0.2665752, 0.2665752, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_1mblp"]
+font_size = 24
+font_color = Color(0.84313726, 0.4117647, 0.007843138, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_76ugb"]
+font_size = 24
+font_color = Color(0.84313726, 0.4117647, 0.007843138, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_sh7xu"]
+font = ExtResource("6_ex7xl")
+font_size = 32
+
+[node name="MainScreen" type="Control"]
+material = SubResource("CanvasItemMaterial_mo3rj")
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_r4uce")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+layout_mode = 0
+offset_right = 1152.0
+offset_bottom = 648.0
+color = Color(0.5995521, 0.00028724433, 0.6062691, 1)
+
+[node name="Button" type="Button" parent="."]
+layout_mode = 0
+offset_left = 434.0
+offset_top = 248.0
+offset_right = 750.0
+offset_bottom = 363.0
+theme_type_variation = &"FlatButton"
+theme_override_fonts/font = ExtResource("2_g3lvd")
+theme_override_font_sizes/font_size = 48
+action_mode = 0
+text = "Play!"
+flat = true
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 0
+offset_left = 104.0
+offset_top = 128.0
+offset_right = 1045.0
+offset_bottom = 185.0
+text = "Platformer Godot Game!"
+label_settings = SubResource("LabelSettings_d4in7")
+
+[node name="Panel" type="Panel" parent="."]
+layout_mode = 0
+offset_left = 56.0
+offset_top = 392.0
+offset_right = 432.0
+offset_bottom = 608.0
+
+[node name="jump_button" type="TextureRect" parent="Panel"]
+layout_mode = 0
+offset_left = 24.0
+offset_top = 80.0
+offset_right = 214.0
+offset_bottom = 125.0
+tooltip_text = "Jump"
+texture = ExtResource("3_ex7xl")
+
+[node name="Label" type="Label" parent="Panel"]
+layout_mode = 0
+offset_left = 52.0
+offset_top = 87.0
+offset_right = 177.0
+offset_bottom = 121.0
+text = "SPACE BAR"
+label_settings = SubResource("LabelSettings_4bfbu")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Label2" type="Label" parent="Panel"]
+layout_mode = 0
+offset_left = 236.0
+offset_top = 85.0
+offset_right = 317.0
+offset_bottom = 119.0
+text = "= Jump"
+label_settings = SubResource("LabelSettings_1mblp")
+
+[node name="left_button" type="TextureRect" parent="Panel"]
+layout_mode = 0
+offset_left = 48.0
+offset_top = 144.0
+offset_right = 97.0
+offset_bottom = 189.0
+texture = ExtResource("4_sh7xu")
+
+[node name="righ_button" type="TextureRect" parent="Panel"]
+layout_mode = 0
+offset_left = 144.0
+offset_top = 144.0
+offset_right = 193.0
+offset_bottom = 189.0
+texture = ExtResource("4_sh7xu")
+
+[node name="arrow_left" type="TextureRect" parent="Panel"]
+layout_mode = 0
+offset_left = 56.0
+offset_top = 184.0
+offset_right = 87.12085
+offset_bottom = 215.12085
+rotation = -1.5707964
+texture = ExtResource("5_malbg")
+expand_mode = 1
+
+[node name="arrow_left2" type="TextureRect" parent="Panel"]
+layout_mode = 0
+offset_left = 154.0
+offset_top = 182.0
+offset_right = 185.12085
+offset_bottom = 213.12085
+rotation = -1.5707964
+texture = ExtResource("5_malbg")
+expand_mode = 1
+flip_v = true
+
+[node name="Label3" type="Label" parent="Panel"]
+layout_mode = 0
+offset_left = 240.0
+offset_top = 144.0
+offset_right = 350.0
+offset_bottom = 178.0
+text = "= A and D"
+label_settings = SubResource("LabelSettings_76ugb")
+
+[node name="Label4" type="Label" parent="Panel"]
+layout_mode = 0
+offset_left = 72.0
+offset_top = 16.0
+offset_right = 292.0
+offset_bottom = 55.0
+text = "Game Controls"
+label_settings = SubResource("LabelSettings_sh7xu")
+
+[node name="PanelInfo" type="Panel" parent="."]
+layout_mode = 0
+offset_left = 712.0
+offset_top = 392.0
+offset_right = 1088.0
+offset_bottom = 608.0
+
+[node name="Label4" type="Label" parent="PanelInfo"]
+layout_mode = 0
+offset_left = 81.0
+offset_top = 20.0
+offset_right = 301.0
+offset_bottom = 59.0
+text = "Game Items"
+label_settings = SubResource("LabelSettings_sh7xu")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="steve" type="TextureRect" parent="PanelInfo"]
+layout_mode = 0
+offset_left = 8.0
+offset_top = 40.0
+offset_right = 104.0
+offset_bottom = 136.0
+tooltip_text = "Jump"
+texture = ExtResource("7_d4in7")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="Label2" type="Label" parent="PanelInfo"]
+layout_mode = 0
+offset_left = 96.0
+offset_top = 72.0
+offset_right = 184.0
+offset_bottom = 143.0
+text = "= You!"
+label_settings = SubResource("LabelSettings_1mblp")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="left_button" type="TextureRect" parent="PanelInfo"]
+layout_mode = 0
+offset_left = 192.0
+offset_top = 80.0
+offset_right = 249.0
+offset_bottom = 125.0
+texture = ExtResource("8_4bfbu")
+
+[node name="righ_button" type="TextureRect" parent="PanelInfo"]
+layout_mode = 0
+offset_left = 161.0
+offset_top = 148.0
+offset_right = 209.0
+offset_bottom = 188.0
+texture = ExtResource("9_1mblp")
+expand_mode = 1
+
+[node name="Label3" type="Label" parent="PanelInfo"]
+layout_mode = 0
+offset_left = 253.0
+offset_top = 88.0
+offset_right = 363.0
+offset_bottom = 122.0
+text = "= Enemy"
+label_settings = SubResource("LabelSettings_76ugb")
+
+[node name="Label5" type="Label" parent="PanelInfo"]
+layout_mode = 0
+offset_left = 48.0
+offset_top = 152.0
+offset_right = 158.0
+offset_bottom = 186.0
+text = "Collect 4"
+label_settings = SubResource("LabelSettings_76ugb")
+
+[node name="Label6" type="Label" parent="PanelInfo"]
+layout_mode = 0
+offset_left = 224.0
+offset_top = 152.0
+offset_right = 334.0
+offset_bottom = 186.0
+text = "to win!"
+label_settings = SubResource("LabelSettings_76ugb")
+
+[connection signal="pressed" from="Button" to="." method="_on_button_pressed"]
