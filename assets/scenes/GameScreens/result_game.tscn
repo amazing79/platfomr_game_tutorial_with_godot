@@ -1,0 +1,70 @@
+[gd_scene load_steps=6 format=3 uid="uid://dr3juwr5ntl7v"]
+
+[ext_resource type="Script" uid="uid://doe40dsnl14h5" path="res://result_game.gd" id="1_frdl5"]
+[ext_resource type="FontFile" uid="uid://dq1rb71m6ffbt" path="res://assets/fonts/Sniglet-Regular.ttf" id="2_qgh5t"]
+[ext_resource type="Texture2D" uid="uid://br1biunb3x1p6" path="res://assets/sprites/player/platformChar_happy.png" id="3_abjyr"]
+[ext_resource type="Texture2D" uid="uid://ckwl3se8qfl0o" path="res://assets/sprites/player/platformChar_duck.png" id="4_vpnq4"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_abjyr"]
+font_size = 52
+font_color = Color(0.10547959, 0.73083454, 0.61382353, 1)
+
+[node name="ResultGame" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_frdl5")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+layout_mode = 0
+offset_right = 1156.0
+offset_bottom = 652.0
+color = Color(0.062282845, 0.18256822, 0.24050891, 1)
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 0
+offset_left = 349.0
+offset_top = 290.0
+offset_right = 819.0
+offset_bottom = 437.0
+text = "Congratulations! you win the game!"
+label_settings = SubResource("LabelSettings_abjyr")
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 3
+
+[node name="Button" type="Button" parent="."]
+layout_mode = 0
+offset_left = 390.0
+offset_top = 463.0
+offset_right = 788.0
+offset_bottom = 531.0
+theme_override_colors/font_hover_color = Color(0.10547959, 0.73083454, 0.61382353, 1)
+theme_override_fonts/font = ExtResource("2_qgh5t")
+theme_override_font_sizes/font_size = 48
+toggle_mode = true
+action_mode = 0
+text = "Go to main Screen"
+flat = true
+
+[node name="WinIcon" type="TextureRect" parent="."]
+layout_mode = 0
+offset_left = 504.0
+offset_top = 102.0
+offset_right = 686.0
+offset_bottom = 277.0
+texture = ExtResource("3_abjyr")
+
+[node name="LosseIcon" type="TextureRect" parent="."]
+visible = false
+layout_mode = 0
+offset_left = 487.0
+offset_top = 107.0
+offset_right = 664.0
+offset_bottom = 275.0
+texture = ExtResource("4_vpnq4")
+
+[connection signal="pressed" from="Button" to="." method="_on_button_pressed"]

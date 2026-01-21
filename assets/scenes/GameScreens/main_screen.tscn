@@ -6,7 +6,7 @@
 [ext_resource type="Texture2D" uid="uid://ch5pa4nkub1kh" path="res://assets/HUD/grey_button13.png" id="4_sh7xu"]
 [ext_resource type="Texture2D" uid="uid://b43c7jf1vbm3n" path="res://assets/HUD/arrow-UP.png" id="5_malbg"]
 [ext_resource type="FontFile" uid="uid://duadsxbxdrojq" path="res://assets/fonts/BalsamiqSans-Bold.ttf" id="6_ex7xl"]
-[ext_resource type="Texture2D" uid="uid://br1biunb3x1p6" path="res://assets/sprites/player/platformChar_happy.png" id="7_d4in7"]
+[ext_resource type="Texture2D" uid="uid://5sprdtfdjpxb" path="res://assets/sprites/player/platformChar_idle.png" id="7_d4in7"]
 [ext_resource type="Texture2D" uid="uid://yeolksjgt0jf" path="res://assets/sprites/enemies/slimeBlue.png" id="8_4bfbu"]
 [ext_resource type="Texture2D" uid="uid://dtu462ayn1sqa" path="res://assets/sprites/coin/gold_1.png" id="9_1mblp"]
 

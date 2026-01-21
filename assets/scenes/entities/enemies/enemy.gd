@@ -39,7 +39,7 @@ func _on_top_checker_body_entered(body: Node2D) -> void:
 	body.rebound()
 
 func _on_remove_timer_timeout() -> void:
-	queue_free()
+	call_deferred("queue_free")
 
 
 func _on_hurt_checker_body_entered(body: Node2D) -> void:

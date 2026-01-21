@@ -96,6 +96,8 @@ func take_damege(enemy_position : float) -> void:
 	Input.action_release("left")
 	Input.action_release("right")
 	Globals.remove_lives()
+	if not Globals.winGame:
+		call_deferred("queue_free")
 
 
 func _on_timer_timeout() -> void:
