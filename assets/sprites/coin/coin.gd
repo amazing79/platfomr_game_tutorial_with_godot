@@ -8,6 +8,7 @@ func _ready() -> void:
 
 func _on_body_entered(_body: Node2D) -> void:
 	$AnimationPlayer.play("bounce")
+	$CoindSound.play()
 	Globals.add_coins()
 	emit_signal("coin_collected")
 	#evita doble colision y contar recolectar la moneda 2 vecesd 

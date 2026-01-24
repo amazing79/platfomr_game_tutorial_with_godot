@@ -31,6 +31,7 @@ func _physics_process(delta: float) -> void:
 
 
 func _on_top_checker_body_entered(body: Node2D) -> void:
+	$SquashSound.play()
 	$EnemySprite.play("squashed") 
 	$Remove_timer.start()
 	$Hurt_checker.set_collision_mask_value(1, false)

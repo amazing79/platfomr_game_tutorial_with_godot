@@ -1,8 +1,8 @@
 extends Node2D
 
 const TOTAL_COINS : int = 4
-var coins = 0
-var lives = 3
+var coins:int = 0
+var lives: int = 3
 var winGame : bool = true
 var result_scene: PackedScene = load("res://assets/scenes/GameScreens/result_game.tscn")
 
@@ -20,6 +20,8 @@ func remove_lives() -> void:
 		end_game()
 
 func end_game() -> void:
+	get_tree().change_scene_to_packed(result_scene)
+	
+func inicialize() -> void:
 	coins = 0
 	lives = 3
-	get_tree().change_scene_to_packed(result_scene)

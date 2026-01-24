@@ -1,9 +1,10 @@
-[gd_scene load_steps=9 format=3 uid="uid://b2lhcijkx5ani"]
+[gd_scene load_steps=10 format=3 uid="uid://b2lhcijkx5ani"]
 
 [ext_resource type="Texture2D" uid="uid://yeolksjgt0jf" path="res://assets/sprites/enemies/slimeBlue.png" id="1_l8ev2"]
 [ext_resource type="Script" uid="uid://da2xyvbkd5kil" path="res://assets/scenes/entities/enemies/enemy.gd" id="1_xpmmi"]
 [ext_resource type="Texture2D" uid="uid://ges3e4ka2583" path="res://assets/sprites/enemies/slimeBlue_squashed.png" id="2_3nc81"]
 [ext_resource type="Texture2D" uid="uid://d5m35t77f6y2" path="res://assets/sprites/enemies/slimeBlue_blue.png" id="2_xpmmi"]
+[ext_resource type="AudioStream" uid="uid://cauut3o2jswus" path="res://assets/sounds/sounds/pepSound2.ogg" id="5_moccm"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_3nc81"]
 animations = [{
@@ -71,6 +72,10 @@ shape = SubResource("RectangleShape2D_qimfk")
 
 [node name="Remove_timer" type="Timer" parent="."]
 wait_time = 0.75
+
+[node name="SquashSound" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("5_moccm")
+volume_db = 20.0
 
 [connection signal="body_entered" from="Hurt_checker" to="." method="_on_hurt_checker_body_entered"]
 [connection signal="body_entered" from="Top_checker" to="." method="_on_top_checker_body_entered"]

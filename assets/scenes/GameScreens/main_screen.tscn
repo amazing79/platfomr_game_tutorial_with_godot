@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://b7d6f7a2nwuvc"]
+[gd_scene load_steps=17 format=3 uid="uid://b7d6f7a2nwuvc"]
 
 [ext_resource type="Script" uid="uid://e8vgr7cn7xho" path="res://assets/scenes/GameScreens/main_screen.gd" id="1_r4uce"]
 [ext_resource type="FontFile" uid="uid://drt2mvfoeqfea" path="res://assets/fonts/KiriFont.ttf" id="2_g3lvd"]
@@ -9,6 +9,7 @@
 [ext_resource type="Texture2D" uid="uid://5sprdtfdjpxb" path="res://assets/sprites/player/platformChar_idle.png" id="7_d4in7"]
 [ext_resource type="Texture2D" uid="uid://yeolksjgt0jf" path="res://assets/sprites/enemies/slimeBlue.png" id="8_4bfbu"]
 [ext_resource type="Texture2D" uid="uid://dtu462ayn1sqa" path="res://assets/sprites/coin/gold_1.png" id="9_1mblp"]
+[ext_resource type="AudioStream" uid="uid://dsv7wiibwoaxq" path="res://assets/sounds/music/Swinging Pants.ogg" id="10_4bfbu"]
 
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_mo3rj"]
 blend_mode = 1
@@ -248,5 +249,10 @@ offset_right = 334.0
 offset_bottom = 186.0
 text = "to win!"
 label_settings = SubResource("LabelSettings_76ugb")
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("10_4bfbu")
+volume_db = -4.0
+autoplay = true
 
 [connection signal="pressed" from="Button" to="." method="_on_button_pressed"]

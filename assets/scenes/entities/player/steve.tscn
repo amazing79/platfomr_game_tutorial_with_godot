@@ -1,7 +1,9 @@
-[gd_scene load_steps=4 format=3 uid="uid://emnx6mgp8n44"]
+[gd_scene load_steps=6 format=3 uid="uid://emnx6mgp8n44"]
 
 [ext_resource type="Script" uid="uid://boxqj1uw8tea7" path="res://assets/scenes/entities/player/steve.gd" id="1_5gug0"]
 [ext_resource type="SpriteFrames" uid="uid://buq5mo5sylvad" path="res://assets/scenes/entities/player/steve.tres" id="2_6nfrh"]
+[ext_resource type="AudioStream" uid="uid://biry64mm4fksr" path="res://assets/sounds/sounds/powerUp12.ogg" id="3_fgrbl"]
+[ext_resource type="AudioStream" uid="uid://ov7m4ya5e0cj" path="res://assets/sounds/sounds/jump1.ogg" id="4_tyir3"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_5gug0"]
 radius = 27.0
@@ -10,7 +12,6 @@ height = 70.0
 [node name="Steve" type="CharacterBody2D"]
 collision_mask = 30
 script = ExtResource("1_5gug0")
-jump_velocity = -650.0
 metadata/_edit_group_ = true
 
 [node name="sprite" type="AnimatedSprite2D" parent="."]
@@ -31,5 +32,13 @@ drag_right_margin = 0.3
 
 [node name="Timer" type="Timer" parent="."]
 wait_time = 0.75
+
+[node name="HurtSound" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("3_fgrbl")
+volume_db = 2.0
+
+[node name="JumpSound" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("4_tyir3")
+volume_db = -5.0
 
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

@@ -1,4 +1,4 @@
-[gd_scene load_steps=25 format=4 uid="uid://eg5o244pqugm"]
+[gd_scene load_steps=26 format=4 uid="uid://eg5o244pqugm"]
 
 [ext_resource type="Texture2D" uid="uid://cu0fbwg2xyseq" path="res://assets/backgrounds/set2_background.png" id="1_23csr"]
 [ext_resource type="Texture2D" uid="uid://dcksoxyv8i4lt" path="res://assets/scenes/tiles/WorldTiles/tileYellow_16.png" id="1_i53gy"]
@@ -12,6 +12,7 @@
 [ext_resource type="Script" uid="uid://dmi0n4qfgx63i" path="res://assets/scenes/maps/hud.gd" id="9_ihcem"]
 [ext_resource type="FontFile" uid="uid://duadsxbxdrojq" path="res://assets/fonts/BalsamiqSans-Bold.ttf" id="10_ihcem"]
 [ext_resource type="PackedScene" uid="uid://b2lhcijkx5ani" path="res://assets/scenes/entities/enemies/enemy.tscn" id="12_rgf7o"]
+[ext_resource type="AudioStream" uid="uid://3paunqc1mwxg" path="res://assets/sounds/music/Retro Beat.ogg" id="13_i8bvg"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_o2yio"]
 texture = ExtResource("1_i53gy")
@@ -208,5 +209,10 @@ direction = 1
 [node name="Enemy3" parent="Node2D" instance=ExtResource("12_rgf7o")]
 position = Vector2(1134, 17)
 detect_cliffs = false
+
+[node name="BackgroundMusic" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("13_i8bvg")
+volume_db = -6.0
+autoplay = true
 
 [connection signal="body_entered" from="FallZone" to="Steve" method="_on_fall_zone_body_entered"]

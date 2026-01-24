@@ -5,12 +5,13 @@ enum State {
 	RUN,
 	JUMP,
 	CLIMB,
-	DUCK
+	DUCK,
+	DEAD
 }
 
 @export_category("Player Stats")
 @export var speed : float = 450.0
-@export var jump_velocity : float = -600.0
+@export var jump_velocity : float = -650.0
 
 const PUSH_FORCE : float = 250.0
 var actual: State = State.IDLE
@@ -24,6 +25,8 @@ func _ready() -> void:
 
 func _physics_process(delta: float) -> void:
 	# Add the gravity.
+	if actual == State.DEAD:
+		return
 	if not is_on_floor():
 		velocity += get_gravity() * delta
 		actual = State.JUMP
@@ -41,6 +44,7 @@ func _physics_process(delta: float) -> void:
 	# Handle jump.
 	if Input.is_action_just_pressed("jump") and is_on_floor():
 		velocity.y = jump_velocity
+		$JumpSound.play()
 	
 	# Get the input direction and handle the movement/deceleration.
 	# As good practice, you should replace UI actions with custom gameplay actions.
@@ -66,12 +70,15 @@ func set_state(new:State) -> void:
 			$sprite.play("jump")
 		State.DUCK:
 			$sprite.play("duck")
+		State.DEAD:
+			return
 			
 
 func _on_fall_zone_body_entered(_body: Node2D) -> void:
 	Globals.coins = 0
 	Globals.remove_lives()
-	reset_scene()
+	if Globals.lives > 0:
+		reset_scene()
 	
 
 func reset_scene() -> void:
@@ -81,6 +88,7 @@ func rebound() -> void:
 	velocity.y = jump_velocity * 0.75
 	
 func take_damege(enemy_position : float) -> void:
+	$HurtSound.play()
 	$Timer.start()
 	speed = 0
 	velocity.y = jump_velocity * .5
@@ -96,8 +104,8 @@ func take_damege(enemy_position : float) -> void:
 	Input.action_release("left")
 	Input.action_release("right")
 	Globals.remove_lives()
-	if not Globals.winGame:
-		call_deferred("queue_free")
+	if Globals.lives == 0:
+		actual = State.DEAD
 
 
 func _on_timer_timeout() -> void:
