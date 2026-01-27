@@ -14,10 +14,12 @@ enum State {
 @export var jump_velocity : float = -650.0
 
 const PUSH_FORCE : float = 250.0
+const ACCELARATION : float = 1.5
 var actual: State = State.IDLE
 var flip = false
 var color_original: Color
 var speed_original: float = speed
+var accelerate = false
 
 func _ready() -> void:
 	color_original = self.modulate
@@ -27,6 +29,7 @@ func _physics_process(delta: float) -> void:
 	# Add the gravity.
 	if actual == State.DEAD:
 		return
+	accelerate = false
 	if not is_on_floor():
 		velocity += get_gravity() * delta
 		actual = State.JUMP
@@ -46,21 +49,28 @@ func _physics_process(delta: float) -> void:
 		velocity.y = jump_velocity
 		$JumpSound.play()
 	
+	if Input.is_action_pressed("run"):
+		accelerate = true
 	# Get the input direction and handle the movement/deceleration.
 	# As good practice, you should replace UI actions with custom gameplay actions.
 	var direction := Input.get_axis("left", "right")
 	
 	if direction:
-		velocity.x = direction * speed
+		if accelerate:
+			velocity.x = direction * (speed * ACCELARATION)
+			$sprite.set_speed_scale(2.0)
+		else: 
+			velocity.x = direction * speed
+			$sprite.set_speed_scale(1)
 	else:
 		velocity.x = move_toward(velocity.x, 0, speed)
 	
-	set_state(actual)
+	play_actual_state(actual)
 	$sprite.flip_h = flip
 	move_and_slide()
 	
 
-func set_state(new:State) -> void:
+func play_actual_state(new:State) -> void:
 	match new:
 		State.IDLE:
 			$sprite.play("idle")
@@ -70,8 +80,6 @@ func set_state(new:State) -> void:
 			$sprite.play("jump")
 		State.DUCK:
 			$sprite.play("duck")
-		State.DEAD:
-			return
 			
 
 func _on_fall_zone_body_entered(_body: Node2D) -> void:
