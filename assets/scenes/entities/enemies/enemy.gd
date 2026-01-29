@@ -31,17 +31,21 @@ func _physics_process(delta: float) -> void:
 
 
 func _on_top_checker_body_entered(body: Node2D) -> void:
-	$SquashSound.play()
-	$EnemySprite.play("squashed") 
-	$Remove_timer.start()
-	$Hurt_checker.set_collision_mask_value(1, false)
-	#body for now is Steve
-	walk_speed = 0
-	body.rebound()
+	if body.name == "Steve":
+		$SquashSound.play()
+		$EnemySprite.play("squashed") 
+		$Remove_timer.start()
+		$Hurt_checker.set_collision_mask_value(1, false)
+		body.rebound()
+		walk_speed = 0
+	
 
 func _on_remove_timer_timeout() -> void:
 	call_deferred("queue_free")
 
 
 func _on_hurt_checker_body_entered(body: Node2D) -> void:
-	body.take_damege(position.x) # Replace with function body.
+	if body.name == "Steve":
+		body.take_damege(position.x) # Replace with function body.
+	else:
+		queue_free()

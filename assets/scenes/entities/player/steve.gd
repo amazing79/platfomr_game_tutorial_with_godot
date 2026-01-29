@@ -13,6 +13,7 @@ enum State {
 @export var speed : float = 450.0
 @export var jump_velocity : float = -650.0
 
+const fireball = preload("res://assets/scenes/entities/fireball/fireball.tscn")
 const PUSH_FORCE : float = 250.0
 const ACCELARATION : float = 1.5
 var actual: State = State.IDLE
@@ -48,6 +49,9 @@ func _physics_process(delta: float) -> void:
 	if Input.is_action_just_pressed("jump") and is_on_floor():
 		velocity.y = jump_velocity
 		$JumpSound.play()
+		
+	if Input.is_action_just_pressed("fire"):
+		shot_fireball(flip)
 	
 	if Input.is_action_pressed("run"):
 		accelerate = true
@@ -121,3 +125,11 @@ func _on_timer_timeout() -> void:
 	set_collision_mask_value(5, true)
 	self.modulate = color_original
 	speed = speed_original
+
+func shot_fireball(left: bool) -> void:
+	var ball = fireball.instantiate()
+	var dir = -1 if left else 1
+	ball.direction = dir
+	ball.position.x =  (40 * dir)
+	ball.position.y = 15
+	self.add_child(ball)
