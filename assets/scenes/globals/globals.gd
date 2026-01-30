@@ -1,6 +1,6 @@
 extends Node2D
 
-const TOTAL_COINS : int = 4
+const TOTAL_COINS : int = 5
 var coins:int = 0
 var lives: int = 3
 var winGame : bool = true

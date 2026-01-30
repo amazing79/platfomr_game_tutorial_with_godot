@@ -29,7 +29,7 @@ animations = [{
 }]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_moccm"]
-size = Vector2(44, 19)
+size = Vector2(44, 23)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_3nc81"]
 size = Vector2(51, 22)
@@ -47,7 +47,7 @@ sprite_frames = SubResource("SpriteFrames_3nc81")
 animation = &"walking"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(0, 7.5)
+position = Vector2(0, 5.5)
 shape = SubResource("RectangleShape2D_moccm")
 
 [node name="Floor_checker" type="RayCast2D" parent="."]

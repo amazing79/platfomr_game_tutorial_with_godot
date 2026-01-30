@@ -51,7 +51,7 @@ func _physics_process(delta: float) -> void:
 		$JumpSound.play()
 		
 	if Input.is_action_just_pressed("fire"):
-		shot_fireball(flip)
+		shot_fireball()
 	
 	if Input.is_action_pressed("run"):
 		accelerate = true
@@ -85,6 +85,8 @@ func play_actual_state(new:State) -> void:
 		State.DUCK:
 			$sprite.play("duck")
 			
+func get_actual_direction() -> int:
+	return -1 if $sprite.flip_h else 1
 
 func _on_fall_zone_body_entered(_body: Node2D) -> void:
 	Globals.coins = 0
@@ -126,10 +128,11 @@ func _on_timer_timeout() -> void:
 	self.modulate = color_original
 	speed = speed_original
 
-func shot_fireball(left: bool) -> void:
+func shot_fireball() -> void:
 	var ball = fireball.instantiate()
-	var dir = -1 if left else 1
+	var dir = self.get_actual_direction()
 	ball.direction = dir
-	ball.position.x =  (40 * dir)
-	ball.position.y = 15
-	self.add_child(ball)
+	ball.position.x = self.position.x + ( 25 * dir)
+	ball.position.y = self.position.y + 25
+	get_parent().add_child(ball)
+	#self.add_child(ball)

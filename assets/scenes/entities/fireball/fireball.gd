@@ -6,13 +6,15 @@ const GRAVITY : float = 20.0
 var direction = 1
 
 func _ready() -> void:
+	velocity.x = SPEED * direction
 	$FireSound.play()
 
 func _physics_process(_delta: float) -> void:
+	
+	velocity.y += GRAVITY
 	if is_on_floor():
 		velocity.y += REBOUND
-	else:
-		velocity.y += GRAVITY
+
 	velocity.x +=  SPEED *  direction
 	$Sprite2D.rotation_degrees += 25  * direction
 	move_and_slide()
