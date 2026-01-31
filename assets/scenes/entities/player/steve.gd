@@ -6,7 +6,8 @@ enum State {
 	JUMP,
 	CLIMB,
 	DUCK,
-	DEAD
+	DEAD,
+	WALL
 }
 
 @export_category("Player Stats")
@@ -21,6 +22,7 @@ var flip = false
 var color_original: Color
 var speed_original: float = speed
 var accelerate = false
+var on_ladder: bool = false
 
 func _ready() -> void:
 	color_original = self.modulate
@@ -28,10 +30,11 @@ func _ready() -> void:
 
 func _physics_process(delta: float) -> void:
 	# Add the gravity.
+	$WallChecker.rotation_degrees = 180 if  self.get_actual_direction() == -1 else 0
 	if actual == State.DEAD:
 		return
 	accelerate = false
-	if not is_on_floor():
+	if not is_on_floor() and not on_ladder:
 		velocity += get_gravity() * delta
 		actual = State.JUMP
 
@@ -49,8 +52,18 @@ func _physics_process(delta: float) -> void:
 	if Input.is_action_just_pressed("jump") and is_on_floor():
 		velocity.y = jump_velocity
 		$JumpSound.play()
-		
-	if Input.is_action_just_pressed("fire"):
+	elif Input.is_action_just_pressed("jump") and $WallChecker.is_colliding():
+		flip = not flip
+		velocity.y = jump_velocity * 0.7
+		$JumpSound.play()
+	
+	if $WallChecker.is_colliding():
+		actual = State.WALL
+	
+	if on_ladder: 
+		actual = State.CLIMB
+	
+	if Input.is_action_just_pressed("fire") and not on_ladder:
 		shot_fireball()
 	
 	if Input.is_action_pressed("run"):
@@ -58,6 +71,7 @@ func _physics_process(delta: float) -> void:
 	# Get the input direction and handle the movement/deceleration.
 	# As good practice, you should replace UI actions with custom gameplay actions.
 	var direction := Input.get_axis("left", "right")
+	var ascending := Input.get_axis("up", "down")
 	
 	if direction:
 		if accelerate:
@@ -68,6 +82,12 @@ func _physics_process(delta: float) -> void:
 			$sprite.set_speed_scale(1)
 	else:
 		velocity.x = move_toward(velocity.x, 0, speed)
+		
+	if ascending and on_ladder:
+		velocity.y = ascending * speed
+	elif on_ladder:
+		velocity.y = move_toward(velocity.y, 0, speed)
+		$sprite.stop()
 	
 	play_actual_state(actual)
 	$sprite.flip_h = flip
@@ -84,7 +104,12 @@ func play_actual_state(new:State) -> void:
 			$sprite.play("jump")
 		State.DUCK:
 			$sprite.play("duck")
+		State.WALL:
+			$sprite.play("wall")
+		State.CLIMB:
+			$sprite.play("climbing")
 			
+
 func get_actual_direction() -> int:
 	return -1 if $sprite.flip_h else 1
 
@@ -136,3 +161,13 @@ func shot_fireball() -> void:
 	ball.position.y = self.position.y + 25
 	get_parent().add_child(ball)
 	#self.add_child(ball)
+
+
+func _on_ladder_checker_body_entered(_body: Node2D) -> void:
+	on_ladder = true
+	set_collision_mask_value(2, false)
+
+
+func _on_ladder_checker_body_exited(_body: Node2D) -> void:
+	on_ladder = false 
+	set_collision_mask_value(2, true)

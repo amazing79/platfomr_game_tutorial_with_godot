@@ -14,6 +14,8 @@ func _physics_process(_delta: float) -> void:
 	velocity.y += GRAVITY
 	if is_on_floor():
 		velocity.y += REBOUND
+	if is_on_wall_only():
+		queue_free()
 
 	velocity.x +=  SPEED *  direction
 	$Sprite2D.rotation_degrees += 25  * direction

@@ -1,4 +1,4 @@
-[gd_scene load_steps=6 format=3 uid="uid://emnx6mgp8n44"]
+[gd_scene load_steps=7 format=3 uid="uid://emnx6mgp8n44"]
 
 [ext_resource type="Script" uid="uid://boxqj1uw8tea7" path="res://assets/scenes/entities/player/steve.gd" id="1_5gug0"]
 [ext_resource type="SpriteFrames" uid="uid://buq5mo5sylvad" path="res://assets/scenes/entities/player/steve.tres" id="2_6nfrh"]
@@ -9,6 +9,9 @@
 radius = 27.0
 height = 70.0
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_tyir3"]
+size = Vector2(22, 51)
+
 [node name="Steve" type="CharacterBody2D"]
 collision_mask = 30
 script = ExtResource("1_5gug0")
@@ -18,6 +21,7 @@ sprite_frames = ExtResource("2_6nfrh")
 animation = &"walk"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+visible = false
 position = Vector2(1, 15)
 shape = SubResource("CapsuleShape2D_5gug0")
 
@@ -40,4 +44,19 @@ volume_db = 2.0
 stream = ExtResource("4_tyir3")
 volume_db = -5.0
 
+[node name="WallChecker" type="RayCast2D" parent="."]
+position = Vector2(0, 15)
+target_position = Vector2(36, 0)
+collision_mask = 2
+
+[node name="LadderChecker" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 64
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="LadderChecker"]
+position = Vector2(0, 21)
+shape = SubResource("RectangleShape2D_tyir3")
+
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
+[connection signal="body_entered" from="LadderChecker" to="." method="_on_ladder_checker_body_entered"]
+[connection signal="body_exited" from="LadderChecker" to="." method="_on_ladder_checker_body_exited"]
