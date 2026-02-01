@@ -11,7 +11,7 @@ enum State {
 }
 
 @export_category("Player Stats")
-@export var speed : float = 450.0
+@export var speed : float = 350.0
 @export var jump_velocity : float = -650.0
 
 const fireball = preload("res://assets/scenes/entities/fireball/fireball.tscn")

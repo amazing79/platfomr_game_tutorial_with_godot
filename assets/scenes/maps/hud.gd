@@ -5,6 +5,7 @@ extends CanvasLayer
 func _ready() -> void:
 	$Coins.text = String.num_uint64(Globals.coins)
 	Globals.hud = self
+	self.update_hearts()
 
 func _physics_process(_delta: float) -> void:
 	$Coins.text = String.num_uint64(Globals.coins)
