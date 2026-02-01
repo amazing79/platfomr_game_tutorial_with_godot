@@ -1,4 +1,4 @@
-[gd_scene load_steps=34 format=4 uid="uid://eg5o244pqugm"]
+[gd_scene load_steps=36 format=4 uid="uid://eg5o244pqugm"]
 
 [ext_resource type="Texture2D" uid="uid://cu0fbwg2xyseq" path="res://assets/backgrounds/set2_background.png" id="1_23csr"]
 [ext_resource type="Texture2D" uid="uid://dcksoxyv8i4lt" path="res://assets/scenes/tiles/WorldTiles/tileYellow_16.png" id="1_i53gy"]
@@ -16,6 +16,8 @@
 [ext_resource type="FontFile" uid="uid://duadsxbxdrojq" path="res://assets/fonts/BalsamiqSans-Bold.ttf" id="10_ihcem"]
 [ext_resource type="PackedScene" uid="uid://b2lhcijkx5ani" path="res://assets/scenes/entities/enemies/enemy.tscn" id="12_rgf7o"]
 [ext_resource type="AudioStream" uid="uid://3paunqc1mwxg" path="res://assets/sounds/music/Retro Beat.ogg" id="13_i8bvg"]
+[ext_resource type="Texture2D" uid="uid://bnhwsd1ftetk7" path="res://assets/sprites/player/hud_heartFull.png" id="15_ke11v"]
+[ext_resource type="Texture2D" uid="uid://oo0n6ngn4155" path="res://assets/sprites/player/hud_heartEmpty.png" id="16_7nt54"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_o2yio"]
 texture = ExtResource("1_i53gy")
@@ -697,12 +699,12 @@ corner_radius_bottom_left = 20
 
 [sub_resource type="LabelSettings" id="LabelSettings_i8bvg"]
 font = ExtResource("10_ihcem")
-font_size = 64
+font_size = 42
 font_color = Color(1, 1, 0.043137256, 1)
 
 [sub_resource type="LabelSettings" id="LabelSettings_ihcem"]
 font = ExtResource("10_ihcem")
-font_size = 32
+font_size = 18
 font_color = Color(1, 1, 0.043137256, 1)
 
 [node name="Level1" type="Node2D"]
@@ -814,38 +816,59 @@ script = ExtResource("9_ihcem")
 [node name="Panel" type="Panel" parent="HUD"]
 offset_left = 29.0
 offset_top = 23.0
-offset_right = 268.0
-offset_bottom = 108.0
+offset_right = 295.0
+offset_bottom = 101.0
 theme_override_styles/panel = SubResource("StyleBoxFlat_rgf7o")
 
 [node name="TextureRect" type="TextureRect" parent="HUD"]
-offset_left = 44.0
-offset_top = 34.0
-offset_right = 105.0
-offset_bottom = 95.0
+offset_left = 43.0
+offset_top = 44.0
+offset_right = 81.0
+offset_bottom = 82.0
 texture = ExtResource("9_6kfic")
+expand_mode = 1
 
 [node name="Coins" type="Label" parent="HUD"]
-offset_left = 139.0
-offset_top = 30.0
-offset_right = 206.24527
-offset_bottom = 108.0
-text = "0"
+offset_left = 99.0
+offset_top = 36.0
+offset_right = 148.0
+offset_bottom = 97.0
+text = "00"
 label_settings = SubResource("LabelSettings_i8bvg")
 horizontal_alignment = 1
 vertical_alignment = 1
 autowrap_mode = 2
 
 [node name="X" type="Label" parent="HUD"]
-offset_left = 103.0
-offset_top = 49.0
-offset_right = 153.0
-offset_bottom = 88.0
+offset_left = 65.0
+offset_top = 47.0
+offset_right = 115.0
+offset_bottom = 86.0
 text = "X"
 label_settings = SubResource("LabelSettings_ihcem")
 horizontal_alignment = 1
 vertical_alignment = 1
 autowrap_mode = 2
+
+[node name="FullHeart" type="TextureRect" parent="HUD"]
+offset_left = 159.0
+offset_top = 45.0
+offset_right = 318.0
+offset_bottom = 90.0
+scale = Vector2(0.8, 0.8)
+texture = ExtResource("15_ke11v")
+expand_mode = 1
+stretch_mode = 1
+
+[node name="EmptyHeart" type="TextureRect" parent="HUD"]
+offset_left = 159.0
+offset_top = 45.0
+offset_right = 318.0
+offset_bottom = 90.0
+scale = Vector2(0.8, 0.8)
+texture = ExtResource("16_7nt54")
+expand_mode = 1
+stretch_mode = 1
 
 [node name="Node2D" type="Node2D" parent="."]
 

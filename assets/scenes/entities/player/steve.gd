@@ -23,6 +23,9 @@ var color_original: Color
 var speed_original: float = speed
 var accelerate = false
 var on_ladder: bool = false
+var hurt = false
+var blink = true
+var total_count: int = 0
 
 func _ready() -> void:
 	color_original = self.modulate
@@ -80,7 +83,7 @@ func _physics_process(delta: float) -> void:
 		else: 
 			velocity.x = direction * speed
 			$sprite.set_speed_scale(1)
-	else:
+	elif not hurt:
 		velocity.x = move_toward(velocity.x, 0, speed)
 		
 	if ascending and on_ladder:
@@ -129,7 +132,7 @@ func rebound() -> void:
 func take_damege(enemy_position : float) -> void:
 	$HurtSound.play()
 	$Timer.start()
-	speed = 0
+	hurt = true
 	velocity.y = jump_velocity * .5
 	modulate = Color(0.796, 0.0, 0.0, 0.525)
 	if position.x <= enemy_position:
@@ -139,7 +142,6 @@ func take_damege(enemy_position : float) -> void:
 		#Esta a la derecha	
 		velocity.x += PUSH_FORCE
 	set_collision_layer_value(1,false)
-	set_collision_mask_value(5, false)
 	Input.action_release("left")
 	Input.action_release("right")
 	Globals.remove_lives()
@@ -148,10 +150,15 @@ func take_damege(enemy_position : float) -> void:
 
 
 func _on_timer_timeout() -> void:
-	set_collision_layer_value(1 , true)
-	set_collision_mask_value(5, true)
-	self.modulate = color_original
-	speed = speed_original
+	total_count += 1
+	blink_damage()
+	if self.total_count == 10:
+		self.total_count = 0
+		set_collision_layer_value(1 , true)
+		self.modulate = color_original
+		hurt = false
+		$Timer.stop()
+		
 
 func shot_fireball() -> void:
 	var ball = fireball.instantiate()
@@ -160,7 +167,6 @@ func shot_fireball() -> void:
 	ball.position.x = self.position.x + ( 25 * dir)
 	ball.position.y = self.position.y + 25
 	get_parent().add_child(ball)
-	#self.add_child(ball)
 
 
 func _on_ladder_checker_body_entered(_body: Node2D) -> void:
@@ -171,3 +177,7 @@ func _on_ladder_checker_body_entered(_body: Node2D) -> void:
 func _on_ladder_checker_body_exited(_body: Node2D) -> void:
 	on_ladder = false 
 	set_collision_mask_value(2, true)
+	
+func blink_damage() -> void:
+	self.blink = not blink
+	modulate = color_original if self.blink else Color(0.796, 0.0, 0.0, 0.525)
