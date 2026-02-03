@@ -12,3 +12,7 @@ func _physics_process(_delta: float) -> void:
 
 func update_hearts() -> void:
 	$FullHeart.size.x = Globals.lives * 53 
+
+
+func _on_button_button_pressed() -> void:
+	pass # Replace with function body.

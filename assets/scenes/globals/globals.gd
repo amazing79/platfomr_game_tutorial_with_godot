@@ -1,6 +1,6 @@
 extends Node2D
 
-const TOTAL_COINS : int = 5
+const TOTAL_COINS : int = 6
 var coins:int = 0
 var lives: int = 3
 var winGame : bool = true
@@ -22,7 +22,8 @@ func remove_lives() -> void:
 		end_game()
 
 func end_game() -> void:
-	get_tree().change_scene_to_packed(result_scene)
+	get_tree().call_deferred("change_scene_to_packed", result_scene)
+
 	
 func inicialize() -> void:
 	coins = 0

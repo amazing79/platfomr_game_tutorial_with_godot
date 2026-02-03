@@ -124,7 +124,8 @@ func _on_fall_zone_body_entered(_body: Node2D) -> void:
 	
 
 func reset_scene() -> void:
-	get_tree().reload_current_scene()
+	get_tree().call_deferred("reload_current_scene")
+
 	
 func rebound() -> void:
 	velocity.y = jump_velocity * 0.75

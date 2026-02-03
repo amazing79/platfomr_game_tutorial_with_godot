@@ -1,5 +1,6 @@
-[gd_resource type="TileSet" load_steps=39 format=3 uid="uid://ckn1cttr3aoeu"]
+[gd_resource type="TileSet" load_steps=41 format=3 uid="uid://ckn1cttr3aoeu"]
 
+[ext_resource type="Texture2D" uid="uid://b3jrpk47y36to" path="res://assets/scenes/tiles/Blocks/platformPack_tile019.png" id="1_1kahq"]
 [ext_resource type="Texture2D" uid="uid://btkk2iuk248nx" path="res://assets/scenes/tiles/WorldTiles/tileYellow_04.png" id="1_a1ce2"]
 [ext_resource type="Texture2D" uid="uid://kegitr2tb1m" path="res://assets/scenes/tiles/WorldTiles/tileYellow_05.png" id="2_1kahq"]
 [ext_resource type="Texture2D" uid="uid://dw6n53j528nal" path="res://assets/scenes/tiles/WorldTiles/tileYellow_06.png" id="3_qcbw4"]
@@ -19,6 +20,12 @@
 [ext_resource type="Texture2D" uid="uid://bnjrj606hhwso" path="res://assets/scenes/tiles/WorldTiles/tileYellow_24.png" id="17_80krf"]
 [ext_resource type="Texture2D" uid="uid://b3gcwfx1hvgn" path="res://assets/scenes/tiles/WorldTiles/tileYellow_25.png" id="18_je5o5"]
 [ext_resource type="Texture2D" uid="uid://vcgq4sjynykm" path="res://assets/scenes/tiles/WorldTiles/tileYellow_26.png" id="19_bh10m"]
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_qcbw4"]
+texture = ExtResource("1_1kahq")
+texture_region_size = Vector2i(64, 64)
+0:0/0 = 0
+0:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-32, -32, 32, -32, 32, 32, -32, 32)
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_3vfje"]
 texture = ExtResource("1_a1ce2")
@@ -154,3 +161,4 @@ sources/34 = SubResource("TileSetAtlasSource_rux2m")
 sources/35 = SubResource("TileSetAtlasSource_2iywb")
 sources/36 = SubResource("TileSetAtlasSource_xkx06")
 sources/37 = SubResource("TileSetAtlasSource_g7hty")
+sources/0 = SubResource("TileSetAtlasSource_qcbw4")
