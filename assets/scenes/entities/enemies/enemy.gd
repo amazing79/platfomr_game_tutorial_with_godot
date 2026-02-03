@@ -38,6 +38,8 @@ func _on_top_checker_body_entered(body: Node2D) -> void:
 		$Hurt_checker.set_collision_mask_value(1, false)
 		body.rebound()
 		walk_speed = 0
+	else: 
+		queue_free()
 	
 
 func _on_remove_timer_timeout() -> void:
