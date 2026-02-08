@@ -1,0 +1,76 @@
+[gd_scene load_steps=10 format=3 uid="uid://dox4xv2w1vh7l"]
+
+[ext_resource type="Script" uid="uid://crhrf8lr7wmqk" path="res://area_2d.gd" id="1_syesc"]
+[ext_resource type="Texture2D" uid="uid://dvvsmm3x87jcm" path="res://assets/sprites/doors/doorClosed.png" id="2_iowsq"]
+[ext_resource type="Texture2D" uid="uid://ca63epc2x58c7" path="res://assets/sprites/doors/doorLocked.png" id="3_5lqc5"]
+[ext_resource type="Texture2D" uid="uid://dncuecwn0rax8" path="res://assets/sprites/doors/doorOpen.png" id="4_plii8"]
+[ext_resource type="AudioStream" uid="uid://d4crna46srkju" path="res://assets/sounds/sounds/switch23.ogg" id="5_iowsq"]
+[ext_resource type="AudioStream" uid="uid://c8anxy47vhblb" path="res://assets/sounds/sounds/upgrade1.ogg" id="6_5lqc5"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_t2wfw"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_iowsq")
+}],
+"loop": true,
+"name": &"closed",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("3_5lqc5")
+}],
+"loop": true,
+"name": &"loked",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("4_plii8")
+}],
+"loop": true,
+"name": &"open",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_vlnay"]
+size = Vector2(64, 119)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_syesc"]
+size = Vector2(448, 66)
+
+[node name="Door" type="Area2D"]
+collision_layer = 0
+script = ExtResource("1_syesc")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+scale = Vector2(0.8125, 0.82)
+sprite_frames = SubResource("SpriteFrames_t2wfw")
+animation = &"loked"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, 20.5)
+shape = SubResource("RectangleShape2D_vlnay")
+
+[node name="NearDoor" type="Area2D" parent="."]
+collision_layer = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="NearDoor"]
+position = Vector2(8, 48)
+shape = SubResource("RectangleShape2D_syesc")
+
+[node name="DoorLokedSound" type="AudioStreamPlayer" parent="NearDoor"]
+stream = ExtResource("5_iowsq")
+
+[node name="TeleportTimer" type="Timer" parent="."]
+wait_time = 0.3
+one_shot = true
+
+[node name="TeleportSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("6_5lqc5")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="body_exited" from="." to="." method="_on_body_exited"]
+[connection signal="body_entered" from="NearDoor" to="." method="_on_near_door_body_entered"]
+[connection signal="timeout" from="TeleportTimer" to="." method="_on_teleport_timer_timeout"]

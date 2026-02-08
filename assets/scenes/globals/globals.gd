@@ -6,6 +6,7 @@ var lives: int = 3
 var winGame : bool = true
 var result_scene: PackedScene = load("res://assets/scenes/GameScreens/result_game.tscn")
 var hud: CanvasLayer # puntero al hud de level 1
+var hasKey: bool = false
 
 # Called when the node enters the scene tree for the first time.
 func add_coins() -> void:
@@ -28,3 +29,8 @@ func end_game() -> void:
 func inicialize() -> void:
 	coins = 0
 	lives = 3
+	hasKey = false
+	
+func take_key() -> void:
+	hasKey = true 
+	self.hud.show_key_collected()

@@ -118,6 +118,7 @@ func get_actual_direction() -> int:
 
 func _on_fall_zone_body_entered(_body: Node2D) -> void:
 	Globals.coins = 0
+	Globals.hasKey = false
 	Globals.remove_lives()
 	if Globals.lives > 0:
 		reset_scene()

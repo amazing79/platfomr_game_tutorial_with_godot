@@ -87,6 +87,7 @@ libraries = {
 
 [node name="CoindSound" type="AudioStreamPlayer2D" parent="Coin"]
 stream = ExtResource("5_0kgo7")
+volume_db = 10.0
 
 [connection signal="body_entered" from="Coin" to="Coin" method="_on_body_entered"]
 [connection signal="animation_finished" from="Coin/AnimationPlayer" to="Coin" method="_on_animation_player_animation_finished"]
