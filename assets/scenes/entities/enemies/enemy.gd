@@ -25,6 +25,11 @@ func _physics_process(delta: float) -> void:
 		$EnemySprite.flip_h = not $EnemySprite.flip_h
 		$Floor_checker.position.x = $CollisionShape2D.shape.get_size().x * direction
 		
+	if is_on_floor() and is_on_wall():
+		direction *= -1
+		$EnemySprite.flip_h = not $EnemySprite.flip_h
+		$Floor_checker.position.x = $CollisionShape2D.shape.get_size().x * direction
+		
 	velocity.x = walk_speed * direction
 
 	move_and_slide()
